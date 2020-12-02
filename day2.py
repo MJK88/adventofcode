@@ -18,7 +18,7 @@ for x in lines:
     
 print("part 1: {}, part 2: {}".format(i,j))
 
-
+# short solutions
 # Part One
 print(sum([int(i) <= p.count(l) <= int(j) for i, j, l, p in re.findall(r'(\d+)-(\d+) (\w): (\w+)', open('data2.in').read())]))
 # Part Two
