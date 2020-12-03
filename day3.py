@@ -18,4 +18,4 @@ for a, b in zip([1, 3, 5, 7, 1], [1, 1, 1, 1, 2]):
             num += 1
     count.append(num)
 
-print("number of trees of all slopes: {}".format(prod(count)))
+print("mult. of the number of trees of all slopes: {}".format(prod(count)))
