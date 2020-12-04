@@ -21,12 +21,10 @@ count = 0
 necessary_fields = ("byr", "iyr", "eyr", "hgt", "ecl", "hcl", "pid")
 for x in lines:
     if all(field in x for field in necessary_fields):
-        # if x.count(":") == 8 or (x.count(":") == 7 and not "cid" in x):
         valid = 0
         for pattern in patterns:
             if re.search(pattern, x):
                 valid += 1
         if valid == len(patterns):
             count += 1
-        # print(x, valid)
 print(count)
