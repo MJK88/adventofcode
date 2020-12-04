@@ -5,7 +5,7 @@ with open("data3.in", "r") as f:
 
 count = 0
 for i, x in enumerate(lines):
-    if x[i * 3 % (len(x))] == "#":
+    if x[i * 3 % len(x)] == "#":
         count += 1
 
 print("number of trees: {}".format(count))
