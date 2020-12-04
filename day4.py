@@ -4,7 +4,8 @@ with open("data4.in", "r") as f:
     lines = [x.replace("\n", " ") for x in f.read().split("\n\n")]
 
 # part 1
-print(sum([x.count(":") == 8 or (x.count(":") == 7 and not "cid" in x) for x in lines]))
+necessary_fields = ("byr", "iyr", "eyr", "hgt", "ecl", "hcl", "pid")
+print(sum([all(field in x for field in necessary_fields) for x in lines]))
 
 # part 2
 patterns = [
@@ -18,13 +19,9 @@ patterns = [
 ]
 
 count = 0
-necessary_fields = ("byr", "iyr", "eyr", "hgt", "ecl", "hcl", "pid")
 for x in lines:
     if all(field in x for field in necessary_fields):
-        valid = 0
-        for pattern in patterns:
-            if re.search(pattern, x):
-                valid += 1
+        valid = sum([bool(re.search(pattern, x)) for pattern in patterns])
         if valid == len(patterns):
             count += 1
 print(count)
