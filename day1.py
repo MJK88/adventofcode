@@ -1,4 +1,4 @@
-lines = list(map(int, open("data.in").readlines()))
+lines = list(map(int, open("data1.in").readlines()))
 
 for num1 in lines:
     if (2020 - num1) in lines:
