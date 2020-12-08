@@ -7,11 +7,9 @@ def run(instructions):
     i = 0
     visited = []
     route = []
-    while 0 <= i < len(instructions):
-        if i in visited:
-            return False, acc, route
+    while 0 <= i < len(instructions) and i not in visited:
         visited.append(i)
-        operation = instructions[i][:3]
+        operation = instructions[i].split()[0]
         argument = int(instructions[i].split()[1])
         if operation in ["jmp", "nop"]:
             route.append(i)
@@ -22,8 +20,10 @@ def run(instructions):
             i += 1
         elif operation == "jmp":
             i += argument
+        if i == len(instructions):
+            return True, acc, route
     else:
-        return True, acc, route
+        return False, acc, route
 
 
 # part 1
@@ -32,9 +32,11 @@ print(f"Part 1 // acc: {acc}")
 
 # part 2
 for i in route:
-    new_instructions = [x.split() for x in lines]
-    new_instructions[i][0] = "nop" if new_instructions[i][0] == "jmp" else "jmp"
-    new_instructions = [" ".join(x) for x in new_instructions]
+    new_instructions = lines.copy()
+    if new_instructions[i][:3] == "jmp":
+        new_instructions[i] = new_instructions[i].replace("jmp", "nop")
+    else:
+        new_instructions[i] = new_instructions[i].replace("nop", "jmp")
     end_reached, acc, _ = run(new_instructions)
     if end_reached:
         print(f"Part 1 // acc: {acc}")
