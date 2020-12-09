@@ -11,20 +11,25 @@ def check(preamble, number):
     return False
 
 
+# part 1
 for i in range(25, len(lines)):
-    preamble = lines[i - 25 : i]
-    number = lines[i]
-    sum_exists = check(preamble, number)
+    sum_exists = check(lines[i - 25 : i], lines[i])
     if not sum_exists:
-        invalid = number
-        print(f"{number} has no pair in preamble: {preamble}")
+        invalid = lines[i]
+        print(f"{lines[i]} has no sum pair in preamble")
 
-
+# part 2
 for i in range(2, 20):
     for j in range(len(lines) - i + 1):
         xslice = lines[j : j + i]
-        print(xslice)
         if sum(xslice) == invalid:
-            print(f"sum {xslice} is {invalid}")
-            print(f"min + max is {min(xslice) + max(xslice)}")
+            print(f"min + max = {min(xslice) + max(xslice)}")
             break
+
+# short solution 1
+for i in range(25, len(lines)):
+    if not lines[i] in {
+        sum(x) for x in combinations(lines[i - 25 : i], 2) if x[0] != x[1]
+    }:
+        break
+print(lines[i])
