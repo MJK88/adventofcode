@@ -20,7 +20,7 @@ for i in range(25, len(lines)):
 
 # part 2
 for i in range(2, 20):
-    for j in range(len(lines) - i + 1):
+    for j in range(len(lines)):
         xslice = lines[j : j + i]
         if sum(xslice) == invalid:
             print(f"min + max = {min(xslice) + max(xslice)}")
