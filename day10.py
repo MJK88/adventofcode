@@ -16,7 +16,7 @@ idx_change = [
 
 # get distance between indices like before
 # this represents the number of consecutive ones and not threes
-idx_diff = [idx_change[0]] + [
+diff_idx = [idx_change[0]] + [
     idx_change[i + 1] - idx_change[i] for i, x in enumerate(idx_change[:-1])
 ]
 
@@ -24,5 +24,5 @@ idx_diff = [idx_change[0]] + [
 # multiply all num of permutations to the power of their occurences
 product = 1
 for y, z in zip([1, 2, 3, 4], [1, 2, 4, 7]):
-    product *= z ** idx_diff.count(y)
+    product *= z ** diff_idx.count(y)
 print(product)
