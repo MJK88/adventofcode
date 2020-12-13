@@ -25,7 +25,7 @@ while True:
             break
         # increasing the step with multiplication of step with bus id
         incr *= div
-        # go to next element
+        # go to next bus id
         i += 1
     # add step to timestamp t
     t += incr
