@@ -1,4 +1,6 @@
 import re
+from collections import defaultdict
+from math import prod
 
 with open("data16.in", "r") as f:
     lines = f.read().splitlines()
@@ -33,23 +35,39 @@ for x in lines[tickets_idx:]:
         tickets.append(list(map(int, x.split(","))))
 
 # get departure valid ranges as a dict
-departure = {}
+ticket_fields = {}
 for x in lines:
-    if match := re.match(r"(departure.*): (\d+)-(\d+) or (\d+)-(\d+)", x):
-        departure_valid = set()
+    if match := re.match(r"(.*): (\d+)-(\d+) or (\d+)-(\d+)", x):
+        valid = set()
         for i, j in [(2, 3), (4, 5)]:
-            departure_valid.update(
+            valid.update(
                 [x for x in range(int(match.group(i)), int(match.group(j)) + 1)]
             )
-        departure[match.group(1)] = departure_valid
+        ticket_fields[match.group(1)] = valid
 
-# find which field is any of the departure ranges
-departure_idx = {}
-for name, valid_range in departure.items():
+# find which field is any of the ranges
+field_idx = defaultdict(list)
+for name, valid_range in ticket_fields.items():
     for i in range(len(tickets[0])):
         temp_list = [x[i] for x in tickets]
         if all(y in valid_range for y in temp_list):
-            departure_idx[name] = i
-print(departure_idx)
+            field_idx[name].append(i)
+
+# remove indices
+real_idx = {}
+while True:
+    remove_idx = []
+    for name, index in field_idx.items():
+        if len(index) == 1:
+            real_idx[name] = index[0]
+            remove_idx.append(index[0])
+    for key in field_idx.keys():
+        for values in remove_idx:
+            if values in field_idx[key]:
+                field_idx[key].remove(values)
+    if len(real_idx.keys()) == len(field_idx.keys()):
+        break
+
 # get departure field of my ticket
-my_ticket = lines[lines.index("your ticket:") + 1]
+my_ticket = list(map(int, lines[lines.index("your ticket:") + 1].split(",")))
+print(prod([my_ticket[i] for name, i in real_idx.items() if "departure" in name]))
