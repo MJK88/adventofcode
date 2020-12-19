@@ -53,18 +53,15 @@ for name, valid_range in ticket_fields.items():
         if all(y in valid_range for y in temp_list):
             field_idx[name].append(i)
 
-# remove indices
+# find and remove indices
 real_idx = {}
 while True:
-    remove_idx = []
     for name, index in field_idx.items():
         if len(index) == 1:
             real_idx[name] = index[0]
-            remove_idx.append(index[0])
-    for key in field_idx.keys():
-        for values in remove_idx:
-            if values in field_idx[key]:
-                field_idx[key].remove(values)
+            for key in field_idx.keys():
+                if index[0] in field_idx[key] and key != name:
+                    field_idx[key].remove(index[0])
     if len(real_idx.keys()) == len(field_idx.keys()):
         break
 
