@@ -12,13 +12,12 @@ content = (
 )
 content = [content, ""]
 for file, content in zip(files, content):
-    file = os.path.join(year, file)
-    file_exists = os.path.isfile(os.path.join(year, file))
+    file_path = os.path.join(year, file)
+    file_exists = os.path.isfile(file_path)
 
     if not file_exists:
-        with open(file, "w+") as f:
+        with open(file_path, "w+") as f:
             f.write(content)
-            f.close()
 
 
 link = f"https://adventofcode.com/2021/day/{number.lstrip('0')}"
