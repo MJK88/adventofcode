@@ -7,9 +7,7 @@ number = today.strftime("%d")
 year = today.strftime("%Y")
 
 files = [f"day{number}.py", f"data{number}.in"]
-content = (
-    f"with open('{files[1]}', 'r') as f:\n\tlines = f.read().splitlines()\nprint(lines)"
-)
+content = f"with open('{year}/{files[1]}', 'r') as f:\n\tlines = f.read().splitlines()\nprint(lines)"
 content = [content, ""]
 for file, content in zip(files, content):
     file_path = os.path.join(year, file)
