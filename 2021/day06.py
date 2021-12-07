@@ -24,10 +24,8 @@ for i, x in enumerate(fish):
     fish[i] = initial_state.count(i)
 
 for i in range(256):
-    breed = fish[0]
-    fish.pop(0)
-    fish.append(0)
+    breed = fish.pop(0)
+    fish.append(breed)
     fish[6] += breed
-    fish[8] += breed
 
 print(sum(fish))
