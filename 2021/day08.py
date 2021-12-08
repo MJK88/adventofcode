@@ -33,36 +33,24 @@ for x in lines:
             dic[8] = x
 
     for x in input_values:
-        if (
-            len(x) == 6
-            and common(x, dic.get(1, "")) == 1
-            and x not in list(dic.values())
-        ):
-            dic[6] = x
+        if x not in list(dic.values()):
+            if len(x) == 6 and common(x, dic.get(1, "")) == 1:
+                dic[6] = x
+            elif len(x) == 5 and common(x, dic.get(1, "")) == 2:
+                dic[3] = x
 
     for x in input_values:
-        if (
-            len(x) == 5
-            and common(x, dic.get(1, "")) == 2
-            and x not in list(dic.values())
-        ):
-            dic[3] = x
-
-    for x in input_values:
-        if len(x) == 5 and x not in list(dic.values()):
-            if common(x, dic.get(6, "")) == 5:
-                dic[5] = x
-            elif common(x, dic.get(6, "")) == 4:
-                dic[2] = x
-        elif (
-            len(x) == 6
-            and common(x, dic.get(1, "")) == 2
-            and x not in list(dic.values())
-        ):
-            if common(x, dic.get(3, "")) == 4:
-                dic[0] = x
-            elif common(x, dic.get(3, "")) == 5:
-                dic[9] = x
+        if x not in list(dic.values()):
+            if len(x) == 5:
+                if common(x, dic.get(6, "")) == 5:
+                    dic[5] = x
+                elif common(x, dic.get(6, "")) == 4:
+                    dic[2] = x
+            elif len(x) == 6 and common(x, dic.get(1, "")) == 2:
+                if common(x, dic.get(3, "")) == 4:
+                    dic[0] = x
+                elif common(x, dic.get(3, "")) == 5:
+                    dic[9] = x
 
     result += int(
         "".join([str(k) for x in output_values for k, v in dic.items() if v == x])
