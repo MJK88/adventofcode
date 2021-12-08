@@ -13,7 +13,7 @@ def common(a, b):
     return len(set(a).intersection(b))
 
 
-sum = 0
+result = 0
 for x in lines:
     input_values, output_values = x.split(" | ")
     input_values = ["".join(sorted(x, key=str.lower)) for x in input_values.split(" ")]
@@ -64,7 +64,7 @@ for x in lines:
             elif common(x, dic.get(3, "")) == 5:
                 dic[9] = x
 
-    sum += int(
+    result += int(
         "".join([str(k) for x in output_values for k, v in dic.items() if v == x])
     )
-print(sum)
+print(result)
