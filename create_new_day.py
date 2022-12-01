@@ -6,7 +6,10 @@ today = date.today()
 number = today.strftime("%d")
 year = today.strftime("%Y")
 
-files = [f"day{number}.py", f"data{number}.in"]
+if not os.path.isdir(year):
+    os.makedirs(year)
+
+files = [f"day{number}.py", f"day{number}.input"]
 content = f"with open('{year}/{files[1]}', 'r') as f:\n\tlines = f.read().splitlines()\nprint(lines)"
 content = [content, ""]
 for file, content in zip(files, content):
@@ -18,8 +21,8 @@ for file, content in zip(files, content):
             f.write(content)
 
 
-link = f"https://adventofcode.com/2021/day/{number.lstrip('0')}"
-data = f"https://adventofcode.com/2021/day/{number.lstrip('0')}/input"
+link = f"https://adventofcode.com/{year}/day/{number.lstrip('0')}"
+data = f"https://adventofcode.com/{year}/day/{number.lstrip('0')}/input"
 
 webbrowser.open(link, new=2)
 webbrowser.open(data, new=2)
