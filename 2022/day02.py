@@ -7,7 +7,7 @@ def PositionAlphabet(char):
 
 def RockPaperScissors(one, two):
     choiceValue = PositionAlphabet(two) - 23
-    
+
     if one == chr(choiceValue + 96).upper():
         return 3 + choiceValue
 
@@ -19,19 +19,19 @@ def RockPaperScissors(one, two):
 
 
 def RockPaperScissorsTwo(one, outcome):
-
     outcome = (PositionAlphabet(outcome) - 24) * 3
     winning = {"A": "Y", "B": "Z", "C": "X"}
     losing = {"A": "Z", "B": "X", "C": "Y"}
 
-    if outcome == 3:
-        return PositionAlphabet(one) + outcome
+    match outcome:
+        case 3:
+            return PositionAlphabet(one) + outcome
 
-    if outcome == 0:
-        two = losing[one]
+        case 0:
+            two = losing[one]
 
-    if outcome == 6:
-        two = winning[one]
+        case 6:
+            two = winning[one]
 
     return PositionAlphabet(two) - 23 + outcome
 
