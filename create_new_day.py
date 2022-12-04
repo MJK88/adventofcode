@@ -10,14 +10,11 @@ if not os.path.isdir(year):
     os.makedirs(year)
 
 files = [f"day{number}.py", f"day{number}.input"]
-content = f"""
-with open(\"{year}/{files[1]}\", \"r\") as f:
+content = f"""with open(\"{year}/{files[1]}\", \"r\") as f:
     lines = f.read().splitlines()
 print(lines)
     
-example = \"\"\"
-        
-        \"\"\".split(\"\\n\")
+example = \"\"\"\"\"\".split(\"\\n\")
 """
 content = [content, ""]
 for file, content in zip(files, content):

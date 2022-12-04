@@ -1,6 +1,3 @@
-from itertools import combinations
-
-
 with open("2022/day03.input", "r") as f:
     lines = f.read().splitlines()
 
