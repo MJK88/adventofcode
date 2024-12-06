@@ -11,8 +11,8 @@ example = """3   4
 )
 
 lista = [x.split("   ") for x in lines]
-trasnposedList = list(map(list, zip(*lista)))
-sortedList = [sorted(x) for x in trasnposedList]
+transposedList = list(map(list, zip(*lista)))
+sortedList = [sorted(x) for x in transposedList]
 
 totalDistance = 0
 for i in range(len(sortedList[0])):
